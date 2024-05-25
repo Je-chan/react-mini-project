@@ -1,2 +1,7 @@
 .idea
 .idea/*
+
+*/.yarn
+*/yarn.lock
+*/.pnp.cjs
+*/.pnp.loader.mjs
