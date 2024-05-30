@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import FullScreenMessage from './components/shared/FullScreenMessage';
+import FullScreenMessage from '@shared/FullScreenMessage';
+import Heading from '@components/sections/Heading';
+import VideoSection from '@components/sections/VideoSection';
+import { Wedding } from '@models/wedding';
+import classNames from 'classnames';
+import styles from './App.module.scss';
+import { format } from 'date-fns';
+
+const cx = classNames.bind(styles);
 
 function App() {
-  const [weddingData, setWeddingData] = useState(null);
+  const [weddingData, setWeddingData] = useState<Wedding | null>(null);
   const [loading, setLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -35,7 +43,12 @@ function App() {
     return <FullScreenMessage type={'error'} />;
   }
 
-  return <div>{JSON.stringify(weddingData)}</div>;
+  return (
+    <div className={cx('container')}>
+      <Heading date={weddingData?.date ?? format(new Date(), 'yyyy-MM-dd')} />
+      <VideoSection />
+    </div>
+  );
 }
 
 export default App;
